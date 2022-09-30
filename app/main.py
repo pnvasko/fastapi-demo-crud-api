@@ -1,4 +1,3 @@
-import uvicorn
 from typing import Callable
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

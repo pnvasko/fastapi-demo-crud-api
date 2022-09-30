@@ -1,7 +1,6 @@
 import os
-from typing import Any, Dict, List, Optional, Union
-from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, validator
-from sqlalchemy.engine.url import URL
+from typing import Any, Dict, List, Optional
+from pydantic import AnyHttpUrl, BaseSettings, PostgresDsn, validator
 
 
 class Settings(BaseSettings):
@@ -29,7 +28,6 @@ class Settings(BaseSettings):
 
     @validator("SQLALCHEMY_POSTGRES_URI", pre=True, check_fields=False)
     def create_postgres_uri(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
-        print("create_postgres_uri")
         if isinstance(v, str):
             return v
         return PostgresDsn.build(

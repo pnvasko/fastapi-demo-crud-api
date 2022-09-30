@@ -6,7 +6,6 @@ from collections import namedtuple
 from fastapi import APIRouter, Request, Depends, HTTPException, Body
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
 from fastapi.responses import Response
 
 
