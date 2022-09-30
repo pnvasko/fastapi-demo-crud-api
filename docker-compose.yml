@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres:9.6
+    ports:
+      - "5433"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=crud-sample
+    networks:
+      - intranet
+
+  app:
+    build:
+      context: .
+    image: "dream-x-crud-api-test"
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=LOCAL
+      - DB_POSTGRES_HOST=postgres
+      - DB_POSTGRES_USER=admin
+      - DB_POSTGRESS_PASSWORD=secret
+      - DB_POSTGRES_PORT=5432
+      - DB_POSTGRES_DATABASE=crud-sample
+    networks:
+      - intranet
+    restart: on-failure
+    volumes:
+      - type: bind
+        source: ./
+        target: /app
+    depends_on:
+      - postgres
+networks:
+  intranet:
